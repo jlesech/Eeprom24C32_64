@@ -65,28 +65,31 @@ void setup()
     // Initiliaze EEPROM library.
     eeprom.initialize();
 
+    const word address = 0;
+    const byte count = 94;
+
     // Declare byte arrays.
-    byte inputBytes[94] = { 0 };
-    byte outputBytes[94] = { 0 };
+    byte inputBytes[count] = { 0 };
+    byte outputBytes[count] = { 0 };
 
     // Fill input array with printable characters. See ASCII table for more
     // details.
-    for (byte i = 0; i < 94; i++)
+    for (byte i = 0; i < count; i++)
     {    
         inputBytes[i] = i + 33;
     }
 
     // Write input array to EEPROM memory.
     Serial.println("Write bytes to EEPROM memory...");
-    eeprom.writeBytes(0, 94, inputBytes);
+    eeprom.writeBytes(address, count, inputBytes);
 
     // Read array with bytes read from EEPROM memory.
     Serial.println("Read bytes from EEPROM memory...");
-    eeprom.readBytes(0, 94, outputBytes);
+    eeprom.readBytes(address, count, outputBytes);
     
     // Print read bytes.
     Serial.println("Read bytes:");
-    for (byte i = 0; i < 94; i++)
+    for (byte i = 0; i < count; i++)
     {
         Serial.write(outputBytes[i]);
         Serial.print(" ");

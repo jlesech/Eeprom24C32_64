@@ -64,17 +64,19 @@ void setup()
         
     // Initialize EEPROM library.
     eeprom.initialize();
+
+    const word address = 0;
     
     // Write a byte at address 0 in EEPROM memory.
     Serial.println("Write byte to EEPROM memory...");
-    eeprom.writeByte(0, 0xAA);
+    eeprom.writeByte(address, 0xAA);
     
     // Write cycle time (tWR). See EEPROM memory datasheet for more details.
     delay(10);
     
     // Read a byte at address 0 in EEPROM memory.
     Serial.println("Read byte from EEPROM memory...");
-    byte data = eeprom.readByte(0);
+    byte data = eeprom.readByte(address);
     
     // Print read byte.
     Serial.print("Read byte = 0x");
