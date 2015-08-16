@@ -141,6 +141,10 @@ Eeprom24C32_64::writeBytes
     if (pageOffset > 0)
     {
         notAlignedLength = EEPROM__PAGE_SIZE - pageOffset;
+        if (length < notAlignedLength)
+        {
+            notAlignedLength = length;
+        }
         writePage(address, notAlignedLength, p_data);
         length -= notAlignedLength;
     }
@@ -163,7 +167,7 @@ Eeprom24C32_64::writeBytes
         if (length > 0)
         {
             // Write remaining uncomplete page.
-            writePage(address, EEPROM__PAGE_SIZE, p_data);
+            writePage(address, length, p_data);
         }
     }
 }
